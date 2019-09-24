@@ -1,0 +1,20 @@
+name: Run tests
+on:
+  push:
+    branches:
+      - github_testing_workflow
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install dependencies
+      uses: nuxt/actions-yarn@node-8
+      with:
+        args: 'install'
+    - name: Run tests
+      uses: alexlafroscia/actions-ember-testing@master
+      with:
+        name: projectcaluma/caluma-demo
+        workdir: caluma-demo
+        dockerfile: Dockerfile
